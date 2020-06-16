@@ -1,0 +1,16 @@
+ingress:
+  enabled: true
+  annotations:
+    nginx.org/mergeable-ingress-type: "minion"
+  path: /minio
+  hosts: [docker-registry.com]
+
+service:
+  port: 80
+  clusterIP: 10.109.104.90
+
+buckets:
+  - name: docker-registry
+    policy: none
+  - name: helm-repository
+    policy: none

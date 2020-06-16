@@ -1,0 +1,9 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: cicd-ingress-master
+  annotations:
+    nginx.org/mergeable-ingress-type: "master"
+spec:
+  rules:
+  - host: docker-registry.com

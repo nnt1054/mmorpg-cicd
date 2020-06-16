@@ -1,0 +1,23 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  generateName: helmsman-job-
+spec:
+  template:
+    spec:
+      containers:
+        - name: helmsman-pod
+          image: praqma/helmsman
+          command: ["helmsman"]
+          # args: ["--apply", "-f", "config/example.yaml", "-kubeconfig", "config/config"]
+          args: ["--destroy", "-f", "config/example.yaml", "-kubeconfig", "config/config"]
+          volumeMounts:
+            - name: helmsman-config
+              mountPath: /config
+      serviceAccountName: helmsman
+      volumes:
+        - name: helmsman-config
+          configMap:
+            name: helmsman-config
+      restartPolicy: Never
+  backoffLimit: 1

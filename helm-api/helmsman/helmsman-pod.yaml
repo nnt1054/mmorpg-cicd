@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: helmsman-pod
+spec:
+  containers:
+    - name: helmsman-pod
+      image: praqma/helmsman
+      command: [ "/bin/bash", "-c", "--" ]
+      args: [ "while true; do sleep 30; done;" ]
+      volumeMounts:
+        - name: helmsman-config
+          mountPath: /config
+  serviceAccountName: helmsman
+  volumes:
+    - name: helmsman-config
+      configMap:
+        name: helmsman-config

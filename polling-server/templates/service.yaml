@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "polling_server.fullname" . }}
+  labels:
+    {{- include "polling_server.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  {{- if not (empty .Values.service.clusterIP) }}
+  clusterIP: {{ .Values.service.clusterIP }}
+  {{end}}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    {{- include "polling_server.selectorLabels" . | nindent 4 }}

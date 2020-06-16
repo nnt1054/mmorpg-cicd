@@ -1,0 +1,20 @@
+ingress:
+  enabled: true
+  annotations:
+    nginx.org/mergeable-ingress-type: "minion"
+  hosts:
+    - name: docker-registry.com
+      path: /helm-repo
+
+env:
+  open:
+    STORAGE: amazon
+    STORAGE_AMAZON_BUCKET: helm-repository
+    STORAEG_AMAZON_PREFIX: ""
+    STORAGE_AMAZON_REGION: us-west-1
+    STORAGE_AMAZON_ENDPOINT: http://10.109.104.90
+    CONTEXT_PATH: "/helm-repo"
+    DISABLE_API: false
+  secret:
+    AWS_ACCESS_KEY_ID: "AKIAIOSFODNN7EXAMPLE"
+    AWS_SECRET_ACCESS_KEY: "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"

@@ -1,0 +1,27 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: helmsman-cronjob
+spec:
+  schedule: "0 */1 * * *"
+  suspend: True
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: helmsman-pod
+              image: praqma/helmsman
+              imagePullPolicy: Always
+              command: ["helmsman"]
+              args: ["--apply", "-f", "config/example.yaml", "-kubeconfig", "config/config"]
+              volumeMounts:
+                - name: helmsman-config
+                  mountPath: /config
+          serviceAccountName: helmsman
+          volumes:
+            - name: helmsman-config
+              configMap:
+                name: helmsman-config
+          restartPolicy: Never
+      backoffLimit: 1
