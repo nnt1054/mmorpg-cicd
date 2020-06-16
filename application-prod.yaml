@@ -1,0 +1,62 @@
+context: app
+
+# settings:
+#   kubeContext: "cicd"
+  # bearerToken: true
+  # username: "root"
+  # password: "peepee"
+  # clusterURI: "https://192.168.161.107:8443"
+
+
+# define your environments and their k8s namespaces
+namespaces:
+  # production:
+  #   protected: true
+  #   limits:
+  #     - type: Container
+  #       default:
+  #         cpu: "300m"
+  #         memory: "200Mi"
+  #       defaultRequest:
+  #         cpu: "200m"
+  #         memory: "100Mi"
+  #     - type: Pod
+  #       max:
+  #         memory: "300Mi"
+  default:
+    protected: false
+
+
+# define any private/public helm charts repos you would like to get charts from
+# syntax: repo_name: "repo_url"
+# only private repos hosted in s3 buckets are now supported
+helmRepos:
+  stable: "https://kubernetes-charts.storage.googleapis.com"
+  nginx-stable: "https://helm.nginx.com/stable"
+  # mmo: "..."
+
+
+
+# define the desired state of your applications helm charts
+# each contains the following:
+
+apps:
+
+  nginx-ingress:
+    namespace: "default"
+    enabled: true
+    chart: "nginx-stable/nginx-ingress"
+    version: 0.5.0
+    priority: -1
+
+  ingress-master:
+    namespace: "default"
+    enabled: true
+    chart: "./ingress-master"
+    version: 0.1.0
+
+  # test-service:
+  #   namespace: "default"
+  #   enabled: false
+  #   chart: ".../test-service"
+  #   version: staging

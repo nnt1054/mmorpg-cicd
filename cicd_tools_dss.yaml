@@ -1,4 +1,4 @@
-context: cicd
+context: app
 
 # settings:
 #   kubeContext: "cicd"
@@ -23,8 +23,8 @@ namespaces:
   #     - type: Pod
   #       max:
   #         memory: "300Mi"
-  default:
-   protected: false
+  cicd:
+    protected: false
 
 
 # define any private/public helm charts repos you would like to get charts from
@@ -33,6 +33,8 @@ namespaces:
 helmRepos:
   stable: "https://kubernetes-charts.storage.googleapis.com"
   nginx-stable: "https://helm.nginx.com/stable"
+  keel-charts: "https://charts.keel.sh"
+
 
 
 # define the desired state of your applications helm charts
@@ -41,49 +43,32 @@ helmRepos:
 apps:
 
   nginx-ingress:
-    namespace: "default"
+    namespace: "cicd"
     enabled: true
     chart: "nginx-stable/nginx-ingress"
     version: 0.5.0
     priority: -1
 
   ingress-master:
-    namespace: "default"
+    namespace: "cicd"
     enabled: true
     chart: "./ingress-master"
     version: 0.1.0
 
-  minio:
-    namespace: "default"
-    enabled: true
-    chart: "stable/minio"
-    version: 5.0.27
-    valuesFile: "./minio/values.yaml"
-    priority: -1
-    wait: true
-
-  chartmuseum:
-    namespace: "default"
-    enabled: true
-    chart: "stable/chartmuseum"
-    version: 2.13.0
-    valuesFile: "./chartmuseum/values.yaml"
-
-  docker-registry:
-    namespace: "default"
-    enabled: true
-    chart: "stable/docker-registry"
-    version: 1.9.3
-    valuesFile: "./docker-registry/values.yaml"
-
   helm-api:
-    namespace: "default"
+    namespace: "cicd"
     enabled: true
     chart: "./helm-api"
     version: staging
 
   polling-server:
-    namespace: "default"
+    namespace: "cicd"
     enabled: true
     chart: "./polling-server"
     version: 0.1.0
+
+  # keel:
+  #   namespace: "cicd"
+  #   enabled: false
+  #   chart: "keel-charts/keel"
+  #   version: 0.17.0

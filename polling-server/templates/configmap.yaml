@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: pipeline-config
+data:
+  docker_pipelines.json: |
+    {
+      "docker_pipelines": [
+  {{- range $pipeline := .Values.docker_pipelines }}
+        {
+          "name": "{{ $pipeline.name }}",
+          "github_url": "{{ $pipeline.github_url }}",
+          "events_url": "{{ $pipeline.events_url }}",
+          "registry_url": "{{ $pipeline.registry_url }}",
+        },
+  {{- end }}
+      ]
+    }
+
+  helm_pipelines.json: |
+    {
+      "helm_pipelines": [
+  {{- range $helm_repo := .Values.helm_pipelines }}
+        {
+          "helm_repo_url": "{{ $helm_repo.helm_repo_url }}",
+          "charts": [
+    {{- range $chart := $helm_repo.charts }}
+            {
+              "name": "{{ $chart.name }}",
+              "latest_version": "{{ $chart.latest_version }}",
+            },
+    {{- end }}
+          ],
+        },
+  {{- end }}
+      ]
+    }

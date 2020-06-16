@@ -2,6 +2,30 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
+docker_pipelines:
+  - name: "cicd_test"
+    github_url: "https://github.com/nnt1054/cicd_test.git"
+    events_url: "https://api.github.com/repos/nnt1054/cicd_test/events"
+    registry_url: "docker-registry.com:80"
+  - name: "cicd_test2"
+    github_url: "https://github.com/nnt1054/cicd_test.git"
+    events_url: "https://api.github.com/repos/nnt1054/cicd_test/events"
+    registry_url: "docker-registry.com:80"
+
+helm_pipelines:
+  - helm_repo_url: "http://docker-registry.com/helm-repo/api/charts"
+    charts:
+      - name: "testchart"
+        latest_version: ""
+      - name: "testchart2"
+        latest_version: ""
+  # - helm_repo_url: "http://docker-registry.com/helm-repo/api/charts"
+  #   charts:
+  #     - name: "testchart"
+  #       latest_version: ""
+  #     - name: "testchart2"
+  #       latest_version: ""
+
 replicaCount: 1
 
 image:

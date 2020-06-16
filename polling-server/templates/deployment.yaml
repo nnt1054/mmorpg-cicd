@@ -41,6 +41,13 @@ spec:
               port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+          volumeMounts:
+            - name: pipeline-config
+              mountPath: /pipelines
+      volumes:
+        - name: pipeline-config
+          configMap:
+            name: pipeline-config
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

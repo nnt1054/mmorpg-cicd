@@ -4,3 +4,6 @@ metadata:
   name: helmsman-config
 data:
   {{- (.Files.Glob "helmsman/*").AsConfig | nindent 2 }}
+  filename: "<file contents>"
+  example.yaml: |
+    

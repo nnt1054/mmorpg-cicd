@@ -1,9 +1,0 @@
-apiVersion: v1
-kind: Pod
-metadata:
-  name: kubeapi-pod
-spec:
-  containers:
-    - name: kubeapi
-      image: docker-registry.com:80/kubeapi
-  serviceAccountName: kubeapi-sa
