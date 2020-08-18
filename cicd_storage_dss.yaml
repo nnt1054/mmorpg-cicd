@@ -7,7 +7,6 @@ context: cicd
   # password: "peepee"
   # clusterURI: "https://192.168.161.107:8443"
 
-
 # define your environments and their k8s namespaces
 namespaces:
   # production:
@@ -33,6 +32,7 @@ namespaces:
 helmRepos:
   stable: "https://kubernetes-charts.storage.googleapis.com"
   nginx-stable: "https://helm.nginx.com/stable"
+  minio: "https://helm.min.io/"
 
 
 # define the desired state of your applications helm charts
@@ -56,8 +56,8 @@ apps:
   minio:
     namespace: "default"
     enabled: true
-    chart: "stable/minio"
-    version: 5.0.27
+    chart: "minio/minio"
+    version: 6.0.4
     valuesFile: "./minio/values.yaml"
     priority: -1
     wait: true

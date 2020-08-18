@@ -39,7 +39,6 @@ helmRepos:
 
 # define the desired state of your applications helm charts
 # each contains the following:
-
 apps:
 
   nginx-ingress:

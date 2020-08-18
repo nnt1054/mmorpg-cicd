@@ -14,3 +14,10 @@ buckets:
     policy: none
   - name: helm-repository
     policy: none
+
+accessKey: "AKIAIOSFODNN7EXAMPLE"
+secretKey: "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"
+
+resources:
+  requests:
+    memory: 1Gi

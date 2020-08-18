@@ -1,0 +1,9 @@
+ingress:
+  enabled: true
+  annotations:
+    nginx.org/mergeable-ingress-type: "minion"
+  path: /minio
+  hosts: [docker-registry.com]
+
+persistence:
+  size: "50Gi"
